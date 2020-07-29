@@ -4,8 +4,12 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+		
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Service, Repository(DAO), DB비즈니스 로직과 관련된 설정 -->
+
+	<!-- mybatis 연결을 위한 빈 등록 -->
+	<!-- dataSource -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -34,13 +38,13 @@
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
-	
-	<!-- 메일관련 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"/>
-		<property name="port" value="587"/>
-		<property name="username" value="boradory92@gmail.com"/>
-		<property name="password" value="Rnrmfqhfk92!"/>
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="boradory92@gmail.com" />
+		<property name="password" value="Rnrmfqhfk92!" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
@@ -57,10 +61,6 @@
 		<property name="maxUploadSize" value="100000000" />
 		<property name="maxInMemorySize" value="100000000" />
 	</bean>
-	
-	
-	
-	
-	
-	
+
+
 </beans>

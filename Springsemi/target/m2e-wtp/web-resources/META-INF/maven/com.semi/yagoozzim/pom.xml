@@ -156,6 +156,8 @@
 			<version>1.5.4</version>
 		</dependency>
 
+
+
 		<!-- mybatis 관련 라이브러리 (4) -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
@@ -184,6 +186,8 @@
 			<artifactId>spring-orm</artifactId>
 			<version>5.2.5.RELEASE</version>
 		</dependency>
+		
+		
 
 		<!-- ***파일 업로드*** -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -215,14 +219,10 @@
 			<artifactId>google-api-services-calendar</artifactId>
 			<version>v3-rev305-1.23.0</version>
 		</dependency>
-
-		<!-- MySQL -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
-		</dependency>
+		
 	</dependencies>
+	
+	
 	<build>
 		<plugins>
 			<plugin>

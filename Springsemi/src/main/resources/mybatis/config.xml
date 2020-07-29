@@ -2,8 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.semi.yagoozzim.index.model.vo.PlayData" alias="PlayData"/>
 	</typeAliases>
 
 	<mappers>
+		<mapper resource="/mybatis/mapper/indexMapper.xml"/>
 	</mappers>
 </configuration>
