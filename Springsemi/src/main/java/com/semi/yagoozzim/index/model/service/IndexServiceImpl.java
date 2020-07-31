@@ -25,4 +25,10 @@ public class IndexServiceImpl implements IndexService {
 		return res;
 	}
 
+	@Override
+	public int insertData(List<Map<String, String>> datalist) {
+		int res =  id.insertData(datalist);
+		return res;
+	}
+
 }

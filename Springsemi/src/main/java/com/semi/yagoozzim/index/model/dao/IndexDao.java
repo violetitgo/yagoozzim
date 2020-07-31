@@ -29,5 +29,9 @@ public class IndexDao {
 		return sqlSession.selectList("PlayData.selectData",data);
 	}
 	
+	public int insertData(List<Map<String, String>> datalist) {
+		return 0;
+	}
+	
 
 }
