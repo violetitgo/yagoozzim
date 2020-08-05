@@ -1,6 +1,7 @@
 package com.semi.yagoozzim.index.controller;
 
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.semi.yagoozzim.index.model.service.IndexService;
 
-
-
 @Controller
 public class IndexController {
 	@Autowired
 	IndexService is;
-	
-	
+
 	@RequestMapping("index/index")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
@@ -46,7 +45,7 @@ public class IndexController {
 		System.out.println(tomorrow);
 		System.out.println(aftertomorrow);
 
-		Map<String,Object> res = is.selectData(sysdate, tomorrow, aftertomorrow);
+		Map<String, Object> res = is.selectData(sysdate, tomorrow, aftertomorrow);
 
 		System.out.println(res);
 		// 여기 직전에 데이터를 담아서 보내자.
@@ -56,21 +55,21 @@ public class IndexController {
 
 		return mav;
 	}
-	
+
 	@RequestMapping("index/about")
 	public ModelAndView aboutUs() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index/about");
 		return mav;
 	}
-	
 
 	public int insertData() {
 		System.out.println("왔는가");
-		List<Map<String, String>> res = webCrawling();
-		System.out.println(res);
+		List<Map<String, String>> datalist = webCrawling();
+
+		System.out.println(datalist);
 		System.out.println("서비스에게 넘기기 직전인 컨트롤러 입니다.");
-		int result = is.insertData(res);
+		int result = is.insertData(datalist);
 		System.out.println("서비스에게 값을 받아온 컨트롤러입니다.");
 		if (result >= 1) {
 			System.out.println("db입력 성공");
@@ -79,16 +78,29 @@ public class IndexController {
 		}
 
 		return result;
-		
+
 	}
-	
+
 	public List<Map<String, String>> webCrawling() {
+		System.out.println("webcrawling 접근");
+		System.setProperty("webdriver.chrome.driver","/chromedriver.exe");
 		Document doc;
-		WebDriver driver = new ChromeDriver();
+		System.out.println("Document 접근");	
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized"); // 전체화면으로 실행
+		options.addArguments("--disable-popup-blocking"); // 팝업 무시
+		options.addArguments("--disable-default-apps");
+
 		List<Map<String, String>> res = null;
+		// Webdriver 객체생성
+		ChromeDriver driver = new ChromeDriver(options);
+		System.out.println("WebDriver 접근");
 
 		try {
-			System.setProperty("webdriver.chrome.driver", "/chromedriver.exe");
+		
+			
+			
+			
 			WebDriverWait wait = new WebDriverWait(driver, 1000);
 
 			driver.get("https://www.koreabaseball.com/Schedule/Schedule.aspx");

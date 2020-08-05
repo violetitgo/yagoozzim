@@ -30,7 +30,11 @@ public class IndexDao {
 	}
 	
 	public int insertData(List<Map<String, String>> datalist) {
-		return 0;
+		
+		System.out.println("IndexDao - inserData - datalist 출력" + datalist);
+		Map<String,Object> pass = new HashMap<>();
+		pass.put("list",datalist);
+		return sqlSession.update("PlayData.insertData", pass);
 	}
 	
 
